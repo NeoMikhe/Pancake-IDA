@@ -3,7 +3,7 @@
 #include <set>
 #include <string>
 #include <algorithm>
-#include <stack> // se agrega esta librería para usar std::stack
+#include <stack>
 
 int h4(std::string s) {
     int c = 0;
