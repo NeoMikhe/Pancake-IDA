@@ -19,11 +19,11 @@ void flip(std::string& str, int i) {
     std::reverse(str.begin(), str.begin() + i + 1);
 }
 
-std::string ida_star(std::string start, std::string end, int depth_limit, int& count, int f_limit) { // se agrega f_limit como parámetro
-    int next_f_limit = INT_MAX; // se inicializa next_f_limit en INT_MAX
-    std::set<std::string> visited; // se corrige la sintaxis de std::set<std::string>
-    std::vector<std::string> path; // se corrige la sintaxis de std::vector<std::string>
-    std::stack<std::string> dfs_stack; // se corrige la sintaxis de std::stack<std::string>
+std::string ida_star(std::string start, std::string end, int depth_limit, int& count, int f_limit) {
+    int next_f_limit = INT_MAX;
+    std::set<std::string> visited;
+    std::vector<std::string> path;
+    std::stack<std::string> dfs_stack;
     dfs_stack.push(start);
     path.push_back(start);
     visited.insert(start);
@@ -42,13 +42,13 @@ std::string ida_star(std::string start, std::string end, int depth_limit, int& c
         for (int i = 1; i < curr.size(); i++) {
             std::string next = curr;
             flip(next, i);
-            if (visited.count(next) == 0 && h4(next) + path.size() + 1 <= f_limit) { // se verifica si el nuevo f(n) es menor o igual que el límite actual
+            if (visited.count(next) == 0 && h4(next) + path.size() + 1 <= f_limit) {
                 visited.insert(next);
                 dfs_stack.push(next);
                 path.push_back(next);
                 count++;
             }
-            else if (h4(next) + path.size() + 1 < next_f_limit) { // se actualiza next_f_limit con el valor mínimo
+            else if (h4(next) + path.size() + 1 < next_f_limit) {
                 next_f_limit = h4(next) + path.size() + 1;
             }
         }
@@ -64,11 +64,11 @@ int main() {
     int count = 0;
     int depth_limit = 1;
     std::string result;
-    int f_limit = h4(pancake); // se inicializa f_limit con h4(pancake)
+    int f_limit = h4(pancake);
     while (result == "") {
         result = ida_star(pancake, pancakeEnd, depth_limit, count, f_limit);
         if (result == "")
-            f_limit = depth_limit; // si no se encontró solución, se actualiza f_limit con la profundidad actual
+            f_limit = depth_limit;
         depth_limit++;
     }
     std::cout << "Pancake: ";
